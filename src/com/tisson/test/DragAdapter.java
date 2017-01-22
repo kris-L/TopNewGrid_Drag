@@ -35,7 +35,7 @@ public class DragAdapter extends BaseAdapter {
 	public boolean isIconVisible = false;
 	public static int selectedPos = -1;
 	public boolean isReset = false;
-
+	
 	public DragAdapter(Context context, List<ChannelItem> channelList) {
 		this.context = context;
 		this.channelList = channelList;

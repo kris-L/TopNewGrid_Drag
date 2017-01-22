@@ -87,6 +87,21 @@ public class DragGrid extends GridView {
 	private String LastAnimationID;
 	private Context ctx;
 	private boolean isReturnOnClickItem = false;
+	
+	private OnLongClickListen onLongClickListen=null;
+	
+	public interface OnLongClickListen {
+		void onItemLongClickOK();
+	}
+	
+	/**
+	 * 定义长按触发的回调函数
+	 * @param event
+	 */
+	public void setOnLongClickListener(OnLongClickListen event)
+	{
+		this.onLongClickListen=event;
+	}
 
 	public DragGrid(Context context) {
 		super(context);
@@ -345,6 +360,9 @@ public class DragGrid extends GridView {
 							@Override
 							public void run() {
 								// TODO Auto-generated method stub
+								System.out.println("长按在这里写监听");
+								onLongClickListen.onItemLongClickOK();
+								
 								dragItemView.destroyDrawingCache();
 								dragItemView.setDrawingCacheEnabled(true);
 								Bitmap dragBitmap = Bitmap
@@ -475,7 +493,7 @@ public class DragGrid extends GridView {
 		//拖动的VIEW下方的POSTION
 		int dPosition = pointToPosition(x, y);
 		// 判断下方的POSTION是否是最开始2个不能拖动的
-		if (dPosition < getCount() - 1) {
+		if (dPosition < getCount() ) {
 			if ((dPosition == -1) || (dPosition == dragPosition)) {
 				return;
 			}

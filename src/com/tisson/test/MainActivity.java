@@ -1,6 +1,8 @@
 package com.tisson.test;
 
-import java.util.ArrayList; 
+import java.util.ArrayList;  
+
+import com.tisson.test.DragGrid.OnLongClickListen;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -19,10 +21,11 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		dragGrid = (DragGrid) findViewById(R.id.userGridView);
+		
+		dragGrid.setOnLongClickListener(onLongClickListen);
 		ArrayList<ChannelItem> dragLists = new ArrayList<ChannelItem>();
 		for (int i = 0; i < 9; i++) {
 			ChannelItem item = new ChannelItem(i + 1, "item" + (i + 1),imgs[i]);
-			
 			if (i == 8)
 				item.setName("其他");
 			dragLists.add(item);
@@ -36,4 +39,15 @@ public class MainActivity extends Activity {
 		super.onDestroy();
 		DragAdapter.selectedPos = -1;
 	}
+	
+	
+	OnLongClickListen onLongClickListen = new OnLongClickListen() {
+		
+		@Override
+		public void onItemLongClickOK() {
+			// TODO Auto-generated method stub
+			System.out.println("长按监听在这做");
+		}
+	};
+	
 }
